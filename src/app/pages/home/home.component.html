@@ -1,0 +1,7 @@
+<h1 class="text-center text-3xl mt-5">Welcome to BookMYBook</h1>
+
+<div class="container mx-auto justify-center flex flex-row gap-5 flex-wrap">
+    <ng-container *ngFor="let book of books">
+        <app-book-card [book]="book"></app-book-card>
+    </ng-container>
+</div>
