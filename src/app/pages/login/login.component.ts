@@ -22,8 +22,12 @@ export class LoginComponent {
   login() {
     this.authService.loginService(this.loginForm.value).subscribe({
       next: (res) => {
+        console.log('res:',res);
+        
         alert('Logged In!');
+
         localStorage.setItem("user_id",res.data._id);
+        localStorage.setItem("access_token",res.token);
         this.authService.isLoggedIn$.next(true);
         this.router.navigate(['home']);
       },

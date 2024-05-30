@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { apiUrls } from '../api.urls';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -31,5 +31,9 @@ export class AuthService {
 
   isLoggedIn() {
     return !!localStorage.getItem('user_id');
+  }
+
+   getAuthToken(): Observable<any> {
+    return localStorage['access_token'];
   }
 }
