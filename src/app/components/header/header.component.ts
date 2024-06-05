@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout(){
-    localStorage.removeItem('user_id');
+    document.cookie = 'access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; //to delete cookie
     this.authService.isLoggedIn$.next(false);
     this.router.navigate(['login'])
   }

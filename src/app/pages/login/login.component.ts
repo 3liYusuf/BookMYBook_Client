@@ -26,15 +26,15 @@ export class LoginComponent {
         
         alert('Logged In!');
 
-        localStorage.setItem("user_id",res.data._id);
-        localStorage.setItem("access_token",res.token);
+        document.cookie = `access_token=${res.token}; path=/`;
+
+
         this.authService.isLoggedIn$.next(true);
         this.router.navigate(['home']);
       },
       error: (err) => {
-        console.log(err);
+        console.log(err.error.message);
       },
     });
-    console.log(this.loginForm.value);
   }
 }

@@ -30,10 +30,12 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    return !!localStorage.getItem('user_id');
+    return !!document.cookie.includes('access_token=');
   }
 
-   getAuthToken(): Observable<any> {
-    return localStorage['access_token'];
+   getAuthToken(){
+     const cookie = document.cookie;
+     const token = cookie.split('=')[1]
+     return token;
   }
 }
