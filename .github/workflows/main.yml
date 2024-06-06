@@ -24,6 +24,6 @@ jobs:
         port: 22
         script: |
           cd /var/www/BookMYBook_Client/
-          git pull origin main
+          git pull origin master
           git status
           npm install
