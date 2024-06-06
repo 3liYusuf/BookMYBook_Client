@@ -27,3 +27,4 @@ jobs:
           git pull origin master
           git status
           npm install
+          ng build
