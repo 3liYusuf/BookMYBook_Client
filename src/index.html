@@ -9,5 +9,16 @@
 </head>
 <body>
   <app-root></app-root>
+  <script>
+    (function() {
+      var baseHref = document.querySelector('base').getAttribute('href');
+      if (baseHref === '/') {
+        window.__BASE_HREF__ = '/BookMYBook/';
+        document.querySelector('base').setAttribute('href', '/BookMYBook/');
+      } else {
+        window.__BASE_HREF__ = baseHref;
+      }
+    })();
+  </script>
 </body>
 </html>
