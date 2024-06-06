@@ -26,4 +26,4 @@ jobs:
           cd /var/www/BookMYBook_Client/
           git pull origin main
           git status
-          npm install --only=prod
+          npm install
