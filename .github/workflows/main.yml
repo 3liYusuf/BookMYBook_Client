@@ -24,7 +24,8 @@ jobs:
         port: 22
         script: |
           cd /var/www/BookMYBook_Client/
-          git pull origin master
+          git reset --hard HEAD
+          git pull origin master --force
           git status
           npm install
           ng build
