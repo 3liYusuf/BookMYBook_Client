@@ -1,5 +1,5 @@
+export const apiMain = 'http://3liyusuf.com/bookAPI/api/'
 export const apiUrls = {
-    authServiceApi: 'http://localhost:8800/api/auth/',
-    bookServiceApi: 'http://localhost:8800/api/book/',
-    serviceApi: 'http://localhost:8800/api/'
+    authServiceApi: `${apiMain}auth/`,
+    bookServiceApi: `${apiMain}book/`
 }
