@@ -1,20 +1,30 @@
 name: Deploy
 
-# Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
+    branches: [ main ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:       
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20.14.0'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build Angular Project
+      run: |
+        export NODE_OPTIONS=--max_old_space_size=4096
+        ng build --source-map=false --optimization=true
+
     - name: Deploy using ssh
       uses: appleboy/ssh-action@master
       with:
@@ -24,7 +34,7 @@ jobs:
         port: 22
         script: |
           cd /var/www/BookMYBook_Client/
-          git pull origin master --force
-          git status
+          git pull origin main --force
           npm install
-          ng build
+          export NODE_OPTIONS=--max_old_space_size=4096
+          ng build --prod --source-map=false --optimization=true
