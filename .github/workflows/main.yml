@@ -20,11 +20,6 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Build Angular Project
-      run: |
-        export NODE_OPTIONS=--max_old_space_size=4096
-        ng build --source-map=false --optimization=true
-
     - name: Deploy using ssh
       uses: appleboy/ssh-action@master
       with:
@@ -36,5 +31,4 @@ jobs:
           cd /var/www/BookMYBook_Client/
           git pull origin master --force
           npm install
-          export NODE_OPTIONS=--max_old_space_size=4096
-          ng build --prod --source-map=false --optimization=true
+          ng build --source-map=false --optimization=true
