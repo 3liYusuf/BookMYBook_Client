@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class AuthService {
   isLoggedIn$= new BehaviorSubject<boolean>(false);
+  registerData:any;
   constructor(public http: HttpClient) {}
   registerService(registerObj: any) {
     return this.http.post<any>(`${apiUrls.authServiceApi}`, registerObj);

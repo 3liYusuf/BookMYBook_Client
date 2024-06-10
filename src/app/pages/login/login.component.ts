@@ -21,11 +21,10 @@ export class LoginComponent {
   userData:any;
   constructor(public authService: AuthService, public fb: FormBuilder, public router:Router, private route: ActivatedRoute) {}
   ngOnInit(): void {
-    this.userData = this.route.snapshot.params;
-    if(this.userData){
+    if(this.authService.registerData){
       this.loginForm = this.fb.group({
-        email: [this.userData.email, Validators.compose([Validators.required, Validators.email])],
-        password: [this.userData.password, Validators.required],
+        email: [this.authService.registerData.email, Validators.compose([Validators.required, Validators.email])],
+        password: [this.authService.registerData.password, Validators.required],
       });
     }else{
       this.loginForm = this.fb.group({

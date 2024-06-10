@@ -29,7 +29,8 @@ export class RegisterComponent {
     this.authService.registerService(this.registerForm.value).subscribe({
       next:(res)=>{
         alert("User Created!");
-        this.router.navigate(['login',this.registerForm.value]);
+        this.authService.registerData = this.registerForm.value;
+        this.router.navigate(['login']);
       },error:(err)=>{
         console.log(err);
         
