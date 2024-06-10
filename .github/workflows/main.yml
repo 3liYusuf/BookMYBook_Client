@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   build:
@@ -34,7 +34,7 @@ jobs:
         port: 22
         script: |
           cd /var/www/BookMYBook_Client/
-          git pull origin main --force
+          git pull origin master --force
           npm install
           export NODE_OPTIONS=--max_old_space_size=4096
           ng build --prod --source-map=false --optimization=true
