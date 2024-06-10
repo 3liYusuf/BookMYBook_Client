@@ -9,14 +9,13 @@ import { apiUrls } from "../api.urls";
 export class AuthInterceptorService implements HttpInterceptor{
     constructor(public authService:AuthService,public http:HttpClient){}
     intercept(req: HttpRequest<any>, next: HttpHandler) { 
-        const cookie = document.cookie;
-        const token = cookie.split('=')[1]
-        
-
+        // const cookie = document.cookie;
+        // const token = cookie.split('=')[1];
+        const token = localStorage.getItem('access_token');
         if(token){
-            const authReq = req.clone({
+            let authReq = req.clone({
               setHeaders: {
-                access_token: `Bearer ${token}`
+                Authorization: `Bearer ${token}`
               }
             });
             return next.handle(authReq);

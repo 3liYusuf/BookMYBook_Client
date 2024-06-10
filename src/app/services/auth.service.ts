@@ -30,12 +30,14 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    return !!document.cookie.includes('access_token=');
+    // return !!document.cookie.includes('access_token=');
+    return !!localStorage.getItem('access_token');
   }
 
    getAuthToken(){
-     const cookie = document.cookie;
-     const token = cookie.split('=')[1]
-     return token;
+    //  const cookie = document.cookie;
+    //  const token = cookie.split('=')[1];
+
+     return localStorage.getItem('access_token');
   }
 }

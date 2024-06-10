@@ -19,7 +19,8 @@ export class HeaderComponent implements OnInit {
   }
 
   logout(){
-    document.cookie = 'access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; //to delete cookie
+    // document.cookie = 'access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; //to delete cookie
+    localStorage.removeItem('access_token');
     this.authService.isLoggedIn$.next(false);
     this.router.navigate(['login'])
   }

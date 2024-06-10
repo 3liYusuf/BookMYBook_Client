@@ -36,8 +36,8 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
     RouterModule
   ],
   providers: [{
-    provide:HTTP_INTERCEPTORS,
-    useClass:AuthInterceptorService,
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService,
     multi:true
   }],
   bootstrap: [AppComponent]

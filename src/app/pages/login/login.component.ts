@@ -26,7 +26,9 @@ export class LoginComponent {
         
         alert('Logged In!');
 
-        document.cookie = `access_token=${res.token}; path=/`;
+        // document.cookie = `access_token=${res.token}; path=/`;
+// login.component.ts or wherever you handle login
+        localStorage.setItem('access_token', res.token);
 
 
         this.authService.isLoggedIn$.next(true);
