@@ -1,9 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { confirmPasswordValidator } from 'src/app/validators/confirm-password.validator';
-
+interface registerForm {
+  firstName:string;
+  lastName:string;
+  email:string;
+  userName:string;
+  password:string;
+  confirmPassword:string;
+}
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,12 +18,21 @@ import { confirmPasswordValidator } from 'src/app/validators/confirm-password.va
 })
 export class LoginComponent {
   loginForm!: FormGroup;
-  constructor(public authService: AuthService, public fb: FormBuilder, public router:Router) {}
+  userData:any;
+  constructor(public authService: AuthService, public fb: FormBuilder, public router:Router, private route: ActivatedRoute) {}
   ngOnInit(): void {
-    this.loginForm = this.fb.group({
-      email: ['', Validators.compose([Validators.required, Validators.email])],
-      password: ['', Validators.required],
-    });
+    this.userData = this.route.snapshot.params;
+    if(this.userData){
+      this.loginForm = this.fb.group({
+        email: [this.userData.email, Validators.compose([Validators.required, Validators.email])],
+        password: [this.userData.password, Validators.required],
+      });
+    }else{
+      this.loginForm = this.fb.group({
+        email: ['', Validators.compose([Validators.required, Validators.email])],
+        password: ['', Validators.required],
+      });
+    }
   }
 
   login() {
