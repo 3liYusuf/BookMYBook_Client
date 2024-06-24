@@ -4,12 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { confirmPasswordValidator } from 'src/app/validators/confirm-password.validator';
 interface registerForm {
-  firstName:string;
-  lastName:string;
-  email:string;
-  userName:string;
-  password:string;
-  confirmPassword:string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  userName: string;
+  password: string;
+  confirmPassword: string;
 }
 @Component({
   selector: 'app-login',
@@ -18,17 +18,28 @@ interface registerForm {
 })
 export class LoginComponent {
   loginForm!: FormGroup;
-  userData:any;
-  constructor(public authService: AuthService, public fb: FormBuilder, public router:Router, private route: ActivatedRoute) {}
+  userData: any;
+  constructor(
+    public authService: AuthService,
+    public fb: FormBuilder,
+    public router: Router,
+    private route: ActivatedRoute
+  ) {}
   ngOnInit(): void {
-    if(this.authService.registerData){
+    if (this.authService.registerData) {
       this.loginForm = this.fb.group({
-        email: [this.authService.registerData.email, Validators.compose([Validators.required, Validators.email])],
+        email: [
+          this.authService.registerData.email,
+          Validators.compose([Validators.required, Validators.email]),
+        ],
         password: [this.authService.registerData.password, Validators.required],
       });
-    }else{
+    } else {
       this.loginForm = this.fb.group({
-        email: ['', Validators.compose([Validators.required, Validators.email])],
+        email: [
+          '',
+          Validators.compose([Validators.required, Validators.email]),
+        ],
         password: ['', Validators.required],
       });
     }
@@ -37,14 +48,13 @@ export class LoginComponent {
   login() {
     this.authService.loginService(this.loginForm.value).subscribe({
       next: (res) => {
-        console.log('res:',res);
-        
+        console.log('res:', res);
+
         alert('Logged In!');
 
         // document.cookie = `access_token=${res.token}; path=/`;
-// login.component.ts or wherever you handle login
+        // login.component.ts or wherever you handle login
         localStorage.setItem('access_token', res.token);
-
 
         this.authService.isLoggedIn$.next(true);
         this.router.navigate(['home']);
