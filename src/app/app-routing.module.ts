@@ -34,7 +34,7 @@ const routes: Routes = [
       { path: '**', redirectTo: 'home', pathMatch: 'full' }, // Optional: Add this for handling undefined routes
     ],
   },
-  { path: '', component: LoginComponent },
+  { path: '', canActivate: [NoAuthGuard], component: LoginComponent },
 ];
 
 @NgModule({
